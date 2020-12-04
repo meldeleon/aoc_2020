@@ -8,6 +8,7 @@ let objectArray = input.map( x=> {
     return record;
 })
 
+//answer 1
 let validRecord = 0
 objectArray.forEach( x => {
     let keysNumber = Object.keys(x).length
@@ -21,6 +22,7 @@ objectArray.forEach( x => {
 console.log("valid records: "+validRecord)
 
 
+//answer 2
 let validRecord2 = 0
 
 objectArray.forEach( x => {
