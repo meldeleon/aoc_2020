@@ -13,7 +13,7 @@ const plane = input.map( x=> {
 
 //console.log(plane)
 
-//remove uniques
+//remove duplicates
 const uniquePlaneGroups = plane.map(currentGroup =>{
     let flattenedGroup = currentGroup.flatMap(currentPerson => {
         return currentPerson.split("")
@@ -35,11 +35,8 @@ let total = groupTotalArray.reduce(reducer)
 console.log("answer #1 is:" + total)
 
 //solution 2
-console.log(plane)
-
 
 // find common value for all groups
-
 const commonValuePlane = plane.map(currentGroup =>{
     //
     let flattenedGroup = currentGroup.flatMap(currentPerson => {
@@ -67,9 +64,11 @@ const commonValuePlane = plane.map(currentGroup =>{
 })
 //console.log(commonValuePlane)
 
+//count common values in each group
 const groupCommonAnswerTotalArray = commonValuePlane.map( currentGroup => {
     return currentGroup.length
 })
 
+//count total common answers
 let total2 = groupCommonAnswerTotalArray.reduce(reducer)
 console.log("answer #2 is:" + total2)
