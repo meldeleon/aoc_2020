@@ -63,8 +63,6 @@ while (toCheckList.length > 0){
         } 
     })
     checkedList.push(currentBag)
-    //console.log("TO CHECK:" + toCheckList);
-    //console.log("CHECKED:" +checkedList);
 }
 
 //count all
