@@ -14,7 +14,7 @@ function executeOrder (commandType, commandIndex, argument) {
     let nextCommand = input[nextIndex]
     let nextType = nextCommand.substring(0,3)
     let nextArgument = nextCommand.match(/(?<=\s).*$/)[0]
-    console.table(executed)
+    //console.table(executed)
     if (executed[commandIndex] !== currentCommand ){       
         console.log("command index: " + commandIndex)
         console.log("argument: "+ argument)
