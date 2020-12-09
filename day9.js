@@ -14,6 +14,7 @@ for (i = preamble; i < input.length; i++) {
 
     if (slice.includes(difference)) {
       console.log(input[i] + " is good");
+      return true;
     }
   }
 }
