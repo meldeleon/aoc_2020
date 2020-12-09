@@ -24,9 +24,9 @@ function runLoop(inputMatrix, counter, accumulator) {
       let currentCommand = inputMatrix[counter];
       let command, argument;
       [command, argument] = currentCommand;
-      console.log("==== ORIGINAL LOOP Check =====");
-      console.log("current iteration: " + currentCommand);
-      console.log("current command: " + command);
+      //console.log("==== ORIGINAL LOOP Check =====");
+      //console.log("current iteration: " + currentCommand);
+      //console.log("current command: " + command);
       if (command === "acc") {
         accumulator = accumulator + argument;
         executed.splice(counter, 1, inputMatrix[counter]);
@@ -81,22 +81,18 @@ function runAlternate(inputMatrix, counter, executed, accumulator) {
       );
       return true;
     } else {
-      console.table(alternateExecuted);
+      //console.table(alternateExecuted);
       let currentCommand = alternateInputMatrix[counter];
-      console.log(currentCommand);
+      //console.log(currentCommand);
       let command, argument;
       [command, argument] = currentCommand;
-      console.log(command);
+      //console.log(command);
       if (command === "acc") {
         accumulator = accumulator + argument;
         alternateExecuted[counter] = alternateInputMatrix[counter];
         counter++;
       } else if (command === "jmp") {
-        if (argument > 0) {
-          counter += argument;
-        } else {
-          counter++;
-        }
+        counter += argument;
       } else {
         //do nothing
         counter++;
