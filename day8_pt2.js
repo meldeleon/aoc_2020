@@ -2,7 +2,7 @@ const input = require("fs").readFileSync("day8.txt").toString().split("\n");
 const inputMatrix = input.flatMap((x) => {
   let array = new Array(x.split(" "));
   array.forEach((x) => {
-    x.splice(1, 1, parseInt(x[1]));
+    x[1] = parseInt(x[1]);
   });
   return array;
 });
@@ -59,6 +59,7 @@ function runAlternate(inputMatrix, counter, executed, accumulator) {
   let currentCommand = inputMatrix[counter];
   console.log("running alternate scenario for: " + currentCommand);
   let command, argument;
+
   [command, argument] = currentCommand;
   if (command === "jmp") {
     alternateCommand = "nop";
@@ -68,10 +69,11 @@ function runAlternate(inputMatrix, counter, executed, accumulator) {
     alternateCommand = "acc";
   }
   let alternateInputMatrix = [...inputMatrix];
-  alternateInputMatrix.splice(counter, 1, [alternateCommand, argument]);
+  alternateInputMatrix[counter] = [alternateCommand, argument];
   console.log("alternate index: " + counter);
+  let alternateExecuted = [...executed];
   //run alternate
-  while (executed[counter] === undefined) {
+  while (alternateExecuted[counter] === undefined) {
     if (counter >= alternateInputMatrix.length) {
       console.log(
         "ALTERNATE PROGRAM TERMINATED NATURALLY// final accumulator: " +
@@ -79,7 +81,7 @@ function runAlternate(inputMatrix, counter, executed, accumulator) {
       );
       return true;
     } else {
-      console.table(executed);
+      console.table(alternateExecuted);
       let currentCommand = alternateInputMatrix[counter];
       console.log(currentCommand);
       let command, argument;
@@ -87,7 +89,7 @@ function runAlternate(inputMatrix, counter, executed, accumulator) {
       console.log(command);
       if (command === "acc") {
         accumulator = accumulator + argument;
-        executed.splice(counter, 1, alternateInputMatrix[counter]);
+        alternateExecuted[counter] = alternateInputMatrix[counter];
         counter++;
       } else if (command === "jmp") {
         if (argument > 0) {
