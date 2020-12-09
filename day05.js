@@ -1,4 +1,4 @@
-const input = require("fs").readFileSync("day5.txt").toString().split("\n")
+const input = require("fs").readFileSync("day05.txt").toString().split("\n")
 //console.log(input)
 
 let minRow = 0

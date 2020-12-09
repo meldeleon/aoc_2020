@@ -1,4 +1,4 @@
-const input = require("fs").readFileSync("day8.txt").toString().split("\n");
+const input = require("fs").readFileSync("day08.txt").toString().split("\n");
 const inputMatrix = input.flatMap((x) => {
   let array = new Array(x.split(" "));
   array.forEach((x) => {

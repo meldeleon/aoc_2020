@@ -1,4 +1,4 @@
-const json = require("day2.json")
+const json = require("./day02.json")
 
 //answer for part 1
 let count = 0

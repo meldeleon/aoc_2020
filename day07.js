@@ -1,6 +1,6 @@
 const { get } = require("http")
 
-const input = require("fs").readFileSync("day7.txt").toString().split("\n")
+const input = require("fs").readFileSync("day07.txt").toString().split("\n")
 
 //console.log(input)
 

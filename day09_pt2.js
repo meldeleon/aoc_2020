@@ -1,6 +1,6 @@
 const { truncate } = require("fs/promises");
 
-const imported = require("fs").readFileSync("day9.txt").toString().split("\n");
+const imported = require("fs").readFileSync("day09.txt").toString().split("\n");
 let input = imported.map((x) => {
   return parseInt(x);
 });

@@ -1,6 +1,6 @@
 const { group } = require("console")
 
-const input = require("fs").readFileSync("day6.txt").toString().split("\n\n")
+const input = require("fs").readFileSync("day06.txt").toString().split("\n\n")
 
 //solution 1
 const plane = input.map( x=> {

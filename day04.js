@@ -1,4 +1,4 @@
-const input = require("fs").readFileSync("day4.txt").toString().split("\n\n")
+const input = require("fs").readFileSync("day04.txt").toString().split("\n\n")
 let objectArray = input.map( x=> {
     let record = {}
     x.split(/\s/).forEach( y => {

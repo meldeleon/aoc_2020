@@ -1,4 +1,4 @@
-const input = require("fs").readFileSync("day3.txt").toString().split("\r\n")
+const input = require("fs").readFileSync("day03.txt").toString().split("\r\n")
 
 let answer1 = () => {
   let trees = 0 //number of tree encountered
