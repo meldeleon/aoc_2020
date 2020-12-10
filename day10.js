@@ -25,6 +25,7 @@ for (i = 0; i < input.length; i++) {
 
 //final adapter
 differenceArray.push(3)
+console.log(differenceArray)
 
 differenceArray = differenceArray.sort(function (a, b) {
   return a - b
