@@ -1,295 +1,105 @@
-const imported = require("fs")
-  .readFileSync("day11.txt")
-  .toString()
-  .split("\r\n")
+const imported = require("fs").readFileSync("day11.txt").toString().split("\n");
 const input = imported.map((x) => {
-  return x.split("")
-})
+  return x.split("");
+});
 
-function checkEmpty(seat) {
-  if (seat === "L" || seat === ".") {
-    return true
+//console.table(input);
+
+//check if a seat is empty
+
+function checkEmpty(x, y, map) {
+  if (
+    map[x] === undefined ||
+    map[x][y] === "L" ||
+    map[x][y] === "." ||
+    map[x][y] === undefined
+  ) {
+    return true;
   } else {
-    return false
+    return false;
   }
 }
 
-function checkFull(seat) {
-  if (seat === "#") {
-    return true
+//check if a seat is full
+function checkFull(x, y, map) {
+  if (map[x][y] === "#") {
+    return true;
   } else {
-    return false
+    return false;
   }
 }
 
-let loops = 2
-for (let h = 0; h < loops; h++) {
-  console.log("h: " + h)
-  for (let i = 0; i < input.length; i++) {
-    console.log("i: " + i)
-    for (let j = 0; j < input[i].length; j++) {
-      console.log("j: " + j)
-      //assign seats
-      let currentSeat = input[i][j]
-      let right = input[i][j + 1]
-      let rightDown = input[i + 1][j + 1]
-      let down = input[i + 1][j]
-      if (j > 0) {
-        let leftDown = input[i + 1][j - 1]
-        let left = input[i][j - 1]
-        console.log(left)
-      }
-      if (i > 0) {
-        let up = input[i - 1][j]
-        let upRight = input[i - 1][j + 1]
-      }
-      if (i > 0 && j > 0) {
-        let upLeft = input[i - 1][j - 1]
-      }
-      //first row
-      if (i === 0) {
-        //first seat
-        if (j === 0) {
-          if (
-            checkEmpty(currentSeat) &&
-            checkEmpty(right) &&
-            checkEmpty(down) &&
-            checkEmpty(rightDown)
-          ) {
-            currentSeat = "#"
-            console.log(i + "," + j + " seat became occupied")
-          } else {
-            currentSeat = "L" //remain unoccupied
-          }
-        }
-        //last seat
-        else if (j === input[i].length - 1) {
-          if (
-            checkEmpty(currentSeat) &&
-            checkEmpty(left) &&
-            checkEmpty(leftDown) &&
-            checkEmpty(down)
-          ) {
-            currentSeat = "#"
-          } else {
-            currentSeat = "L" //remain unoccupied
-          }
-        }
-        //any seat
-        else {
-          if (
-            checkEmpty(currentSeat) &&
-            checkEmpty(left) &&
-            checkEmpty(right) &&
-            checkEmpty(leftDown) &&
-            checkEmpty(down) &&
-            checkEmpty(rightDown)
-          ) {
-            currentSeat = "#"
-          } else if (checkFull(currentSeat)) {
-            let occupied = 5
-            if (checkEmpty(left)) {
-              occupied--
-            }
-            if (checkEmpty(leftDown)) {
-              occupied--
-            }
-            if (checkEmpty(down)) {
-              occupied--
-            }
-            if (checkEmpty(rightDown)) {
-              occupied--
-            }
-            if (checkEmpty(right)) {
-              occupied--
-            }
-            if (occupied <= 3) {
-              currentSeat = "L"
-            }
-          }
-        }
-      }
-      //last row
-      else if (i === input.length - 1) {
-        //first seat
-        if (j === 0) {
-          if (
-            checkEmpty(currentSeat) &&
-            checkEmpty(right) &&
-            checkEmpty(up) &&
-            checkEmpty(upRight)
-          ) {
-            currentSeat = "#"
-          } else {
-            currentSeat = "L" //remain unoccupied
-          }
-        }
-        //last seat
-        else if (j === input[i].length - 1) {
-          if (
-            checkEmpty(currentSeat) &&
-            checkEmpty(left) &&
-            checkEmpty(up) &&
-            checkEmpty(upLeft)
-          ) {
-            currentSeat = "#"
-          } else {
-            currentSeat = "L" //remain unoccupied
-          }
-        }
-        //any seat
-        else {
-          if (
-            checkEmpty(currentSeat) &&
-            checkEmpty(left) &&
-            checkEmpty(right) &&
-            checkEmpty(upLeft) &&
-            checkEmpty(up) &&
-            checkEmpty(upRight)
-          ) {
-            currentSeat = "#"
-          } else if (checkFull(currentSeat)) {
-            let occupied = 5
-            if (checkEmpty(left)) {
-              occupied--
-            }
-            if (checkEmpty(right)) {
-              occupied--
-            }
-            if (checkEmpty(upLeft)) {
-              occupied--
-            }
-            if (checkEmpty(up)) {
-              occupied--
-            }
-            if (checkEmpty(upRight)) {
-              occupied--
-            }
-            if (occupied <= 4) {
-              currentSeat = "L"
-            }
-          }
-        }
-      }
-      //any row
-      else {
-        //first seat
-        if (j === 0) {
-          if (
-            checkEmpty(currentSeat) &&
-            checkEmpty(up) &&
-            checkEmpty(upRight) &&
-            checkEmpty(right) &&
-            checkEmpty(down) &&
-            checkEmpty(rightDown)
-          ) {
-            currentSeat = "#"
-          } else if (checkFull(currentSeat)) {
-            let occupied = 5
-            if (checkEmpty(left)) {
-              occupied--
-            }
-            if (checkEmpty(right)) {
-              occupied--
-            }
-            if (checkEmpty(upLeft)) {
-              occupied--
-            }
-            if (checkEmpty(up)) {
-              occupied--
-            }
-            if (checkEmpty(upRight)) {
-              occupied--
-            }
-            if (occupied <= 4) {
-              currentSeat = "L"
-            }
-            if (occupied <= 3) {
-              currentSeat = "L"
-            }
-          }
-        }
-        //last seat
-        else if (j === input.length - 1) {
-          if (
-            checkEmpty(currentSeat) &&
-            checkEmpty(up) &&
-            checkEmpty(upLeft) &&
-            checkEmpty(left) &&
-            checkEmpty(leftDown) &&
-            checkEmpty(down)
-          ) {
-            currentSeat = "#"
-          } else if (checkFull(currentSeat)) {
-            let occupied = 5
-            if (checkEmpty(up)) {
-              occupied--
-            }
-            if (checkEmpty(upLeft)) {
-              occupied--
-            }
-            if (checkEmpty(left)) {
-              occupied--
-            }
-            if (checkEmpty(leftDown)) {
-              occupied--
-            }
-            if (checkEmpty(down)) {
-              occupied--
-            }
-            if (occupied <= 4) {
-              currentSeat = "L"
-            }
-            if (occupied <= 3) {
-              currentSeat = "L"
-            }
-          }
-        }
-        //any seat
-        else {
-          if (
-            checkEmpty(currentSeat) &&
-            checkEmpty(left) &&
-            checkEmpty(right) &&
-            checkEmpty(leftDown) &&
-            checkEmpty(down) &&
-            checkEmpty(rightDown)
-          ) {
-            currentSeat = "#"
-          } else if (checkFull(currentSeat)) {
-            let occupied = 8
-            if (checkEmpty(left)) {
-              occupied--
-            }
-            if (checkEmpty(leftDown)) {
-              occupied--
-            }
-            if (checkEmpty(down)) {
-              occupied--
-            }
-            if (checkEmpty(rightDown)) {
-              occupied--
-            }
-            if (checkEmpty(right)) {
-              occupied--
-            }
-            if (checkEmpty(rightUp)) {
-              occupied--
-            }
-            if (checkEmpty(up)) {
-              occupied--
-            }
-            if (checkEmpty(upLeft)) {
-              occupied--
-            }
-            if (occupied <= 3) {
-              currentSeat = "L"
-            }
-          }
-        }
+//change seat logic
+function seatChange(x, y, map) {
+  let emptySeats = 0;
+  let fullSeats = 0;
+  for (let i = -1; i <= 1; i++) {
+    for (let j = -1; j <= 1; j++) {
+      checkX = x + i;
+      checkY = y + j;
+      //console.log(`input ${checkX}, ${checkY} :`);
+      if (checkX === x && checkY === y) {
+      } else if (checkEmpty(checkX, checkY, map)) {
+        emptySeats++;
+      } else {
+        fullSeats++;
       }
     }
   }
+  /*console.log(
+    `${x}, ${y} has empty seats: ${emptySeats}, full seats: ${fullSeats}`
+  );*/
+  if (map[x][y] === "L" && emptySeats === 8) {
+    return "#";
+  } else if (map[x][y] === "#" && fullSeats >= 4) {
+    return "L";
+  } else {
+    return map[x][y];
+  }
 }
 
-console.table(input)
+// one iteration
+function loop(area) {
+  let result = [];
+  for (let z = 0; z < area.length; z++) {
+    let newRow = [];
+    for (let a = 0; a < area[z].length; a++) {
+      let newSeat = seatChange(z, a, area);
+      newRow.push(newSeat);
+    }
+    result.push(newRow);
+  }
+
+  return result;
+}
+
+function countFull(area) {
+  let fullSeats = 0;
+  area.forEach((row) => {
+    row.forEach((seat) => {
+      if (seat === "#") {
+        fullSeats++;
+      }
+    });
+  });
+  //console.log("full seats: " + fullSeats);
+  return parseInt(fullSeats);
+}
+//first loop
+let result = loop(input);
+//console.log(countFull(result));
+
+let changeArray = [];
+let difference = 1;
+while (difference !== 0) {
+  result = loop(result);
+  let fullSeats = countFull(result);
+  changeArray.push(fullSeats);
+  if (changeArray.length >= 2) {
+    difference =
+      parseInt(changeArray[changeArray.length - 1]) -
+      parseInt(changeArray[changeArray.length - 2]);
+  }
+  console.log(changeArray);
+  console.log(`difference is ${difference}`);
+}
