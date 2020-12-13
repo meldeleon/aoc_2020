@@ -62,13 +62,15 @@ function seatChange(x, y, map) {
         checkOutOfBounds(checkX, checkY, map)
       ) {
         emptySeats++;
-      } else if (checkAisle(checkX, checkY, map)) {
+      }
+      //if seat is aisle
+      else if (checkAisle(checkX, checkY, map)) {
         outerX = checkX + x * loop;
         outerY = checkY + y * loop;
         console.log(`outer x: ${outerX}, outer y: ${outerY}`);
         while (true) {
           if (checkOutOfBounds(outerX, outerY, map)) {
-            console.log(`outerx/y is out of bands`);
+            console.log(`outerx/y is out of bounds`);
             emptySeats++;
             break;
           } else if (checkEmpty(outerX, outerX, map)) {
@@ -95,7 +97,7 @@ function seatChange(x, y, map) {
   console.log(
     `${x}, ${y} has empty seats: ${emptySeats}, full seats: ${fullSeats}`
   );
-  if (map[x][y] === "L" && emptySeats === 8) {
+  if (map[x][y] === "L" && fullSeats === 0) {
     return "#";
   } else if (map[x][y] === "#" && fullSeats >= 5) {
     return "L";
@@ -135,6 +137,9 @@ function countFull(area) {
 let result = loop(input);
 console.table(result);
 
+let result2 = loop(result);
+
+console.table(result2);
 /*
 let changeArray = [];
 let difference = 1;
