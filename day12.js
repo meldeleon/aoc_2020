@@ -1,11 +1,4 @@
-const { schedulingPolicy } = require("cluster")
-const { dir, trace } = require("console")
-
 const input = require("fs").readFileSync("day12.txt").toString().split("\n")
-
-function dbg(text, a, b, c, d) {
-  console.log(`${text}: ${a}, ${b}, ${c}, ${d}`)
-}
 
 //store directions as index
 const cardinalDirections = ["N", "E", "S", "W"]
