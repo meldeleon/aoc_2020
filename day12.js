@@ -1,38 +1,88 @@
-const input = require("fs").readFileSync("day12.txt").toString().split("\n");
+const { schedulingPolicy } = require("cluster")
+const { dir, trace } = require("console")
 
-functon dbg(text,1,2,3,4){
-    console.log(text ": " 1,2,3,4,);
+const input = require("fs").readFileSync("day12.txt").toString().split("\n")
+
+function dbg(text, a, b, c, d) {
+  console.log(`${text}: ${a}, ${b}, ${c}, ${d}`)
 }
 
-//console.log(input);
-
+//store directions as index
+const cardinalDirections = ["N", "E", "S", "W"]
+//create move log
 const moves = []
 
+// create ship as object, properties as state
 let ship = {
-    facing: "east",
-    north: 0,
-    south: 0,
-    east: 0,
-    west: 0,
+  facing: "E", //E
+  north: 0,
+  south: 0,
+  east: 0,
+  west: 0,
+}
+turn("L", 270)
 
+function checkDirection(direction) {
+  return direction === ship.facing
 }
 
-function directio
-
-function moveShip(command){
-    let prefix = command.match(/^[A-Z]/)
-    let distance = comand.match(/[0-9].*/)
-    if (prefix === "N" || prefix === "E" || prefix === "S" || prefix === "W"){
-
-    }
-
+function turn(direction, degrees) {
+  // console.log(`ship facing: ${ship.facing}`)
+  let currentDirection = cardinalDirections.findIndex(checkDirection)
+  // console.log(currentDirection)
+  let turns = degrees / 90
+  // console.log(turns)
+  if (direction === "R") {
+    let newIndex = (currentDirection + turns) % 4
+    console.log(`new index:  ${newIndex}`)
+    ship.facing = cardinalDirections[newIndex]
+  } else if (direction === "L") {
+    let newIndex = (currentDirection + (4 - turns)) % 4
+    console.log(`new index:  ${newIndex}`)
+    ship.facing = cardinalDirections[newIndex]
+  } else {
+    // console.log("invalid turning direction")
+  }
 }
 
+function travel(cardinal, distance) {
+  switch (cardinal) {
+    case "N":
+      ship.north += distance
+      break
+    case "E":
+      ship.east += distance
+      break
+    case "S":
+      ship.south += distance
+      break
+    case "W":
+      ship.west += distance
+      break
+  }
+}
 
-Action N means to move north by the given value.
-Action S means to move south by the given value.
-Action E means to move east by the given value.
-Action W means to move west by the given value.
-Action L means to turn left the given number of degrees.
-Action R means to turn right the given number of degrees.
-Action F means to move forward by the given value in the direction the ship is currently facing.
+function executeCommand(command, ship) {
+  let prefix = command.match(/^[A-Z]/).toString()
+  let distanceOrDegreses = parseInt(command.match(/[0-9].*/))
+  console.log(prefix, distanceOrDegreses)
+  if (prefix === "N" || prefix === "E" || prefix === "S" || prefix === "W") {
+    travel(prefix, distanceOrDegreses)
+  } else if (prefix === "R" || prefix === "L") {
+    turn(prefix, distanceOrDegreses)
+  } else if (prefix === "F") {
+    travel(ship.facing, distanceOrDegreses)
+  } else {
+    console.log("invalid command")
+  }
+  console.log(ship)
+}
+
+input.forEach((command) => {
+  executeCommand(command, ship)
+})
+
+let solution =
+  Math.abs(ship.north - ship.south) + Math.abs(ship.east - ship.west)
+
+console.log(solution)
