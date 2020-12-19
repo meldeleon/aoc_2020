@@ -13,7 +13,6 @@ let ship = {
   east: 0,
   west: 0,
 }
-turn("L", 270)
 
 function checkDirection(direction) {
   return direction === ship.facing
