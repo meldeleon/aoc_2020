@@ -2,8 +2,6 @@ const input = require("fs").readFileSync("day12.txt").toString().split("\n")
 
 //store directions as index
 const cardinalDirections = ["N", "E", "S", "W"]
-//create move log
-const moves = []
 
 // create ship as object, properties as state
 let ship = {
