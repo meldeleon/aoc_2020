@@ -11,7 +11,7 @@ function rotateRight(location) {
   return update;
 }
 
-function rotateLeft(locaton) {
+function rotateLeft(location) {
   let update = [];
   update.push(location[1] * -1);
   update.push(location[0]);
@@ -43,7 +43,7 @@ function moveWaypoint(direction, distance) {
   }
 }
 
-function executeCommand(command, ship, waypoint) {
+function executeCommand(command) {
   let prefix = command.match(/^[A-Z]/).toString();
   let distance = parseInt(command.match(/[0-9].*/));
   console.log(prefix, distance);
@@ -73,10 +73,10 @@ function executeCommand(command, ship, waypoint) {
 }
 
 input.forEach((command) => {
-  executeCommand(command, ship, waypoint);
+  executeCommand(command);
 });
 
-let solution = ship[0] + ship[1];
+let solution = Math.abs(ship[0]) + Math.abs(ship[1]);
 
 console.log(solution);
 console.table(ship);
