@@ -1,12 +1,6 @@
 const input = require("fs").readFileSync("day12.txt").toString().split("\n");
 
-//store directions as index
-const cardinalDirections = ["N", "E", "S", "W"];
-
-//create move log
-const moves = [];
-
-// create ship as object, properties as state
+// create and waypoint as arrays with x,y location
 let ship = [0, 0];
 let waypoint = [10, 1];
 
